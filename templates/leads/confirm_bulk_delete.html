@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="form-card"><div class="page-header"><div><h1>Delete selected leads?</h1><p>This also deletes their notes, Lighthouse results, website inspections, and outreach history.</p></div></div><div class="card"><div class="card-body">
+  <ul>{% for lead in leads %}<li><strong>{{ lead.business_name }}</strong> <span class="text-muted">{{ lead.source }} / {{ lead.source_id }}</span></li>{% endfor %}</ul>
+  <div class="notice notice-warning">This action cannot be undone.</div>
+  <form method="post" action="{% url 'lead-bulk-delete' %}">{% csrf_token %}<input type="hidden" name="confirm" value="yes">{% for lead_id in lead_ids %}<input type="hidden" name="lead_ids" value="{{ lead_id }}">{% endfor %}<div class="actions"><button class="btn btn-danger" type="submit">Delete {{ lead_ids|length }} selected lead{{ lead_ids|length|pluralize }}</button><a class="btn btn-outline-secondary" href="{% url 'lead-list' %}">Cancel</a></div></form>
+</div></div></div>
+{% endblock %}

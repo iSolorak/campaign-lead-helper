@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="form-card">
+  <div class="page-header"><div><h1>Integration settings</h1><p>Configure discovery and analysis services without editing environment files.</p></div></div>
+  <div class="notice notice-warning">API keys are stored in the local SQLite database. Keep the database and its backups private.</div>
+  <div class="card"><div class="card-body">
+    <form method="post">{% csrf_token %}{{ form.as_p }}<button class="btn btn-primary">Save settings</button></form>
+    <hr><form method="post" action="{% url 'test-google-places' %}">{% csrf_token %}<button class="btn btn-outline-secondary" type="submit">Test Google Places connection</button></form>
+  </div></div>
+  <div class="card card-body section"><h2 class="h5">Notes</h2><p class="text-muted">OpenStreetMap Overpass does not require an API key. Use a descriptive User-Agent with a contact address. Google Places remains disabled until enabled here and supplied with a key. PageSpeed can work without a key, but a key improves quota reliability.</p><p class="text-muted">Console email is safe for development and prints messages to the server process. Choose SMTP to send real email. Use either TLS (commonly port 587) or SSL (commonly port 465), never both.</p></div>
+</div>
+{% endblock %}

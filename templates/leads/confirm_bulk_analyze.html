@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="form-card"><div class="page-header"><div><h1>Analyze selected leads?</h1><p>PageSpeed will run mobile and desktop Lighthouse analysis for each selected lead with a website.</p></div></div><div class="card"><div class="card-body">
+  <p><strong>{{ website_count }}</strong> of {{ lead_ids|length }} selected lead{{ lead_ids|length|pluralize }} have a website that can be analyzed.</p>
+  <ul>{% for lead in leads %}<li><strong>{{ lead.business_name }}</strong> — {% if lead.has_website %}{{ lead.normalized_domain }}{% else %}<span class="text-muted">No website listed — will be skipped</span>{% endif %}</li>{% endfor %}</ul>
+  <div class="notice notice-warning">This performs up to two Google PageSpeed API requests per website and may take several minutes.</div>
+  <form method="post" action="{% url 'lead-bulk-analyze' %}">{% csrf_token %}<input type="hidden" name="confirm" value="yes">{% for lead_id in lead_ids %}<input type="hidden" name="lead_ids" value="{{ lead_id }}">{% endfor %}<div class="actions"><button class="btn btn-primary" type="submit">Analyze {{ website_count }} website{{ website_count|pluralize }}</button><a class="btn btn-outline-secondary" href="{% url 'lead-list' %}">Cancel</a></div></form>
+</div></div></div>
+{% endblock %}

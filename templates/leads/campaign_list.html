@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-header">
+  <div><h1>Campaigns</h1><p>Create and run discovery without leaving the dashboard.</p></div>
+  <a class="btn btn-primary" href="{% url 'campaign-create' %}">New campaign</a>
+</div>
+<div class="item-grid">
+  {% for campaign in campaigns %}
+  <article class="card card-body item-card">
+    <div>
+      <div class="d-flex justify-content-between gap-2"><h2 class="h5 mb-1">{{ campaign.name }}</h2><span class="badge-soft">{% if campaign.is_active %}Active{% else %}Paused{% endif %}</span></div>
+      <p class="item-meta">{{ campaign.get_provider_display }} · {{ campaign.location }}, {{ campaign.country }}</p>
+    </div>
+    <div><strong>{% if campaign.text_search_query %}“{{ campaign.text_search_query }}”{% else %}{{ campaign.search_term }}{% endif %}</strong>{% if campaign.text_search_query %} <span class="badge-soft">Free-text search</span>{% endif %}<p class="item-meta mb-0">Targets: {{ campaign.target_with_website }} with website / {{ campaign.target_without_website }} without · {{ campaign.lead_count }} saved</p></div>
+    <div class="item-actions">
+      <form method="post" action="{% url 'campaign-collect' campaign.pk %}">{% csrf_token %}<button class="btn btn-primary btn-sm" {% if not campaign.is_active %}disabled{% endif %}>Collect now</button></form>
+      <a class="btn btn-outline-secondary btn-sm" href="{% url 'campaign-edit' campaign.pk %}">Edit</a>
+      <form method="post" action="{% url 'campaign-toggle' campaign.pk %}">{% csrf_token %}<button class="btn btn-outline-secondary btn-sm">{% if campaign.is_active %}Pause{% else %}Activate{% endif %}</button></form>
+    </div>
+  </article>
+  {% empty %}<div class="card empty-state"><h2 class="h5">No campaigns yet</h2><p>Create one to begin discovering businesses.</p></div>{% endfor %}
+</div>
+{% endblock %}

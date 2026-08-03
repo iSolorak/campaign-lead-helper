@@ -1,0 +1,1 @@
+{% extends "base.html" %}{% block content %}<h1>Confirm email</h1><div class="card card-body"><p><strong>To:</strong> {{ message.recipient }}</p><p><strong>Subject:</strong> {{ message.subject }}</p><pre class="text-wrap">{{ message.body }}</pre><form method="post">{% csrf_token %}<button class="btn btn-danger">Send email now</button></form></div>{% endblock %}
