@@ -7,9 +7,9 @@ optional, disabled provider.
 
 ## Demo
 
-https://github.com/iSolorak/campaign-lead-helper/raw/main/docs/demo.mp4
+<img src="docs/demo.gif" alt="Leadboard demo" width="360">
 
-(The file also lives in the repo at [`docs/demo.mp4`](docs/demo.mp4).)
+(Full-quality video: [`docs/demo.mp4`](docs/demo.mp4).)
 
 ## Features
 
