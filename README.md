@@ -5,6 +5,12 @@ reviewing their websites, recording notes, and sending manually reviewed outreac
 OpenStreetMap Overpass is the default free discovery source. Google Places is an
 optional, disabled provider.
 
+## Demo
+
+https://github.com/iSolorak/campaign-lead-helper/raw/main/docs/demo.mp4
+
+(The file also lives in the repo at [`docs/demo.mp4`](docs/demo.mp4).)
+
 ## Features
 
 - Campaigns with per-run targets for leads with and without a website listed
